@@ -12,13 +12,41 @@ let state = {
   totalClicks: 25,
   allPics: [],
 }
+console.log(state.allPics);
+// debugger;
 
 function Product( name, image) {
   this.name = name;
   this.imgFile = image;
   this.votes = 0;
   this.views = 0;
-  state.allGoats.push(this);
+  state.allPics.push(this);
+}
+
+function renderImages(){
+
+  function pickRandomImage() {
+    return Math.floor(Math.random() * state.allPics.length);
+  }
+
+  let productOne = pickRandomImage();
+  let productTwo = pickRandomImage();
+  let productThree = pickRandomImage();
+
+  while(productOne === productTwo || productOne === productThree || productTwo === productThree){
+    productTwo = pickRandomImage();
+    productThree = pickRandomImage();
+  }
+
+  image1.src = state.allPics[productOne].imgFile;
+  image1.alt = state.allPics[productOne].name;
+
+  image2.src = state.allPics[productTwo].imgFile;
+  image2.alt = state.allPics[productTwo].name;
+
+  image3.src = state.allPics[productThree].imgFile;
+  image3.alt = state.allPics[productThree].name;
+
 }
 
 new Product('R2D2 Bag', 'img/bag.jpg');
@@ -40,3 +68,4 @@ new Product('Tauntaun', 'img/tauntaun.jpg');
 new Product('Unicorn', 'img/unicorn.jpg');
 new Product('Water Can', 'img/water-can.jpg');
 new Product('Wine Glass', 'img/wine-glass.jpg');
+renderImages();
