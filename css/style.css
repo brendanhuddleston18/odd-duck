@@ -1,0 +1,9 @@
+#pictures {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+#pictures img{
+  width: 200px;
+}

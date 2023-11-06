@@ -49,6 +49,26 @@ function renderImages(){
 
 }
 
+function clickEvent(event){
+  let imageName = event.target.alt;
+
+  for ( let i = 0; i < state.allPics.length; i++){
+    if ( imageName === state.allPics[i].name) {
+      state.allPics[i].votes++;
+      break;
+    }
+  }
+
+  state.currentClicks++;
+  console.log(state.currentClicks);
+  renderImages();
+}
+
+function clickImage(){
+  picContainer.addEventListener("click", clickEvent);
+
+}
+
 new Product('R2D2 Bag', 'img/bag.jpg');
 new Product('Banana', 'img/banana.jpg');
 new Product('Bathroom', 'img/bathroom.jpg');
@@ -69,3 +89,4 @@ new Product('Unicorn', 'img/unicorn.jpg');
 new Product('Water Can', 'img/water-can.jpg');
 new Product('Wine Glass', 'img/wine-glass.jpg');
 renderImages();
+clickImage();
