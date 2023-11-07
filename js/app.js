@@ -51,6 +51,13 @@ function renderImages(){
   image3.src = state.allPics[productThree].imgFile;
   image3.alt = state.allPics[productThree].name;
 
+  state.allPics[productOne].views++;
+  state.allPics[productTwo].views++;
+  state.allPics[productThree].views++;
+}
+
+function removeButton(){
+  button.style.display = 'none';
 }
 
 function renderResultsBtn(){
@@ -60,7 +67,7 @@ function renderResultsBtn(){
 function showResults() {
   for(let i = 0; i < state.allPics.length; i++){
     let productResult = document.createElement('p');
-    productResult.textContent = (`${state.allPics[i].name} votes: ${Number(state.allPics[i].votes)}`);
+    productResult.textContent = (`${state.allPics[i].name} votes: ${Number(state.allPics[i].votes)} views: ${state.allPics[i].views}`);
     reportContainer.appendChild(productResult);
   }
 }
@@ -78,7 +85,6 @@ function clickEvent(event){
   if(state.currentClicks >= state.totalClicks){
     picContainer.removeEventListener("click", clickEvent);
     renderResultsBtn();
-    showResults();
   }
 
   state.currentClicks++;
@@ -113,3 +119,4 @@ new Product('Water Can', 'img/water-can.jpg');
 new Product('Wine Glass', 'img/wine-glass.jpg');
 renderImages();
 listeners();
+removeButton()
