@@ -1,8 +1,8 @@
-# LAB - Number
+# LAB - 11
 
 ## Odd-Duck
 
-I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app
+I Build a site that dynamically changes pictures on the screen after the user clicks them.  How many times a certain image has shown and the amount of times the image is clicked are both displayed at the end when the show results button is clicked.
 
 ### Author: Student/Group Name
 
@@ -13,7 +13,7 @@ I build an app with a direct and powerful purpose. It does all of the things tha
 
 ### Lighthouse Accessibility Report Score
 
-* Provide a screenshot of your score after running a Lighthouse Accessibility report.
+![lighthouse](img/lighthouse.png)
 
 ### Reflections and Comments
 
