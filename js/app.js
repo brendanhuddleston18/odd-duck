@@ -65,11 +65,45 @@ function renderResultsBtn(){
 }
 
 function showResults() {
+  let imageNames = [];
+  let imageVotes = [];
+  let imageViews = [];
+
+
   for(let i = 0; i < state.allPics.length; i++){
-    let productResult = document.createElement('p');
-    productResult.textContent = (`${state.allPics[i].name} votes: ${Number(state.allPics[i].votes)} views: ${state.allPics[i].views}`);
-    reportContainer.appendChild(productResult);
+    imageNames.push(state.allPics[i].name);
+    imageVotes.push(state.allPics[i].votes);
+    imageViews.push(state.allPics[i].views);
   }
+
+  const data = {
+    labels: imageNames,
+    datasets: [
+      {
+        label: 'Votes',
+        data: imageVotes,
+        backgroundColor: ['green']
+
+      },
+      {
+        label: 'Views',
+        data: imageViews,
+        backgroundColor: ['rebeccapurple']
+      }
+    ]
+  }
+  let config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  }
+  let myChart = new Chart(reportContainer, config);
 }
 
 function clickEvent(event){
