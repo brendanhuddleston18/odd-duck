@@ -2,6 +2,7 @@
 
 let picContainer = document.getElementById('pictures');
 let reportContainer = document.getElementById('report');
+let button = document.getElementById('results');
 
 let image1 = document.querySelector('#pictures img:first-child');
 let image2 = document.querySelector('#pictures img:nth-child(2)');
@@ -12,7 +13,8 @@ let state = {
   totalClicks: 25,
   allPics: [],
 }
-console.log(state.allPics);
+// console.log(state.allPics);
+// console.log(state.allPics.votes)
 // debugger;
 
 function Product( name, image) {
@@ -22,6 +24,8 @@ function Product( name, image) {
   this.views = 0;
   state.allPics.push(this);
 }
+
+console.log(Product);
 
 function renderImages(){
 
@@ -49,6 +53,18 @@ function renderImages(){
 
 }
 
+function renderResultsBtn(){
+  button.style.display = "block";
+}
+
+function showResults() {
+  for(let i = 0; i < state.allPics.length; i++){
+    let productResult = document.createElement('p');
+    productResult.textContent = (`${state.allPics[i].name} votes: ${Number(state.allPics[i].votes)}`);
+    reportContainer.appendChild(productResult);
+  }
+}
+
 function clickEvent(event){
   let imageName = event.target.alt;
 
@@ -59,14 +75,21 @@ function clickEvent(event){
     }
   }
 
+  if(state.currentClicks >= state.totalClicks){
+    picContainer.removeEventListener("click", clickEvent);
+    renderResultsBtn();
+    showResults();
+  }
+
   state.currentClicks++;
-  console.log(state.currentClicks);
+  // console.log(state.currentClicks);
+  // console.log(Product.votes);
   renderImages();
 }
 
-function clickImage(){
+function listeners(){
   picContainer.addEventListener("click", clickEvent);
-
+  button.addEventListener("click", showResults);
 }
 
 new Product('R2D2 Bag', 'img/bag.jpg');
@@ -89,4 +112,4 @@ new Product('Unicorn', 'img/unicorn.jpg');
 new Product('Water Can', 'img/water-can.jpg');
 new Product('Wine Glass', 'img/wine-glass.jpg');
 renderImages();
-clickImage();
+listeners();
