@@ -119,4 +119,4 @@ new Product('Water Can', 'img/water-can.jpg');
 new Product('Wine Glass', 'img/wine-glass.jpg');
 renderImages();
 listeners();
-removeButton()
+removeButton();
