@@ -12,6 +12,7 @@ let state = {
   currentClicks: 0,
   totalClicks: 25,
   allPics: [],
+  threeImages: [],
 };
 // console.log(state.allPics);
 // console.log(state.allPics.votes)
@@ -32,14 +33,27 @@ function renderImages(){
     return Math.floor(Math.random() * state.allPics.length);
   }
 
+  // Pick initial values for each product
   let productOne = pickRandomImage();
   let productTwo = pickRandomImage();
   let productThree = pickRandomImage();
 
-  while(productOne === productTwo || productOne === productThree || productTwo === productThree){
+  // Checking if images match eachother or were used in previous set
+  while(productOne === productTwo || productOne === productThree || state.threeImages.includes(productOne)){
+    productOne = pickRandomImage();
+    console.log(state.threeImages);
+  }
+
+  while(productTwo === productThree || productTwo === productOne || state.threeImages.includes(productTwo)){
     productTwo = pickRandomImage();
+  };
+
+  while(productThree === productOne || productThree === productTwo || state.threeImages.includes(productThree)){
     productThree = pickRandomImage();
   }
+
+  // Storing images into an array so when user clicks again, the while loops will know the previous set
+  state.threeImages = [productOne, productTwo, productThree];
 
   image1.src = state.allPics[productOne].imgFile;
   image1.alt = state.allPics[productOne].name;
@@ -54,6 +68,8 @@ function renderImages(){
   state.allPics[productTwo].views++;
   state.allPics[productThree].views++;
 }
+
+
 
 function removeButton(){
   button.style.display = 'none';
