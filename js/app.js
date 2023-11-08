@@ -22,7 +22,6 @@ function Product( name, image) {
   this.imgFile = image;
   this.votes = 0;
   this.views = 0;
-  state.allPics.push(this);
 }
 
 console.log(Product);
@@ -154,7 +153,7 @@ let productList = [
   new Product('Wine Glass', 'img/wine-glass.jpg'),
 ];
 
-for(let = 0; i < productList.length; i++){
+for(let i = 0; i < productList.length; i++){
   state.allPics.push(productList[i]);
 }
 renderImages();
