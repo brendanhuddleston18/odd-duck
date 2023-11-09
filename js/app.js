@@ -31,7 +31,6 @@ function Product( name, image) {
   this.imgFile = image;
   this.votes = 0;
   this.views = 0;
-
 }
 
 
@@ -77,8 +76,14 @@ function renderImages(){
   state.allPics[productThree].views++;
 }
 
-let storedVotesData = localStorage.getItem('allPics');
+// let storedVotesData = localStorage.getItem('allPics');
 
+// if (storedVotesData) {
+//   state.allPics = JSON.parse(storedVotesData);
+//   console.log(storedVotesData);
+// }
+
+// console.log(state.allPics);
 
 function removeButton(){
   button.style.display = 'none';
@@ -89,21 +94,25 @@ function renderResultsBtn(){
 }
 
 function showResults() {
+
+  reportContainer.innerHTML = '';
+
   let imageNames = [];
   let imageVotes = [];
   let imageViews = [];
+  console.log(imageNames);
 
-  if (storedVotesData) {
-    state.allPics = JSON.parse(storedVotesData);
-  }
 
-  console.log(storedVotesData);
+  // console.log(storedVotesData);
 
   for(let i = 0; i < state.allPics.length; i++){
     imageNames.push(state.allPics[i].name);
     imageVotes.push(state.allPics[i].votes);
     imageViews.push(state.allPics[i].views);
   }
+  localStorage.setItem(`allPics`, JSON.stringify(state.allPics));
+
+  console.log('image names: ', imageNames);
 
   const data = {
     labels: imageNames,
@@ -144,7 +153,6 @@ function clickEvent(event){
       break;
     }
   }
-  localStorage.setItem(`allPics`, JSON.stringify(state.allPics));
 
   if(state.currentClicks >= state.totalClicks){
     picContainer.removeEventListener("click", clickEvent);
