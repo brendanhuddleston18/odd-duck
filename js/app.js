@@ -8,12 +8,20 @@ let image1 = document.querySelector('#pictures img:first-child');
 let image2 = document.querySelector('#pictures img:nth-child(2)');
 let image3 = document.querySelector('#pictures img:nth-child(3)');
 
+
 let state = {
   currentClicks: 0,
   totalClicks: 25,
   allPics: [],
   threeImages: [],
 };
+
+let storedData = localStorage.getItem('allPics');
+
+if(storedData){
+  state.allPics = JSON.parse(storedData);
+}
+
 // console.log(state.allPics);
 // console.log(state.allPics.votes)
 // debugger;
@@ -23,9 +31,10 @@ function Product( name, image) {
   this.imgFile = image;
   this.votes = 0;
   this.views = 0;
+
 }
 
-console.log(Product);
+
 
 function renderImages(){
 
@@ -41,7 +50,6 @@ function renderImages(){
   // Checking if images match eachother or were used in previous set
   while(productOne === productTwo || productOne === productThree || state.threeImages.includes(productOne)){
     productOne = pickRandomImage();
-    console.log(state.threeImages);
   }
 
   while(productTwo === productThree || productTwo === productOne || state.threeImages.includes(productTwo)){
@@ -69,6 +77,7 @@ function renderImages(){
   state.allPics[productThree].views++;
 }
 
+let storedVotesData = localStorage.getItem('allPics');
 
 
 function removeButton(){
@@ -84,6 +93,11 @@ function showResults() {
   let imageVotes = [];
   let imageViews = [];
 
+  if (storedVotesData) {
+    state.allPics = JSON.parse(storedVotesData);
+  }
+
+  console.log(storedVotesData);
 
   for(let i = 0; i < state.allPics.length; i++){
     imageNames.push(state.allPics[i].name);
@@ -130,6 +144,7 @@ function clickEvent(event){
       break;
     }
   }
+  localStorage.setItem(`allPics`, JSON.stringify(state.allPics));
 
   if(state.currentClicks >= state.totalClicks){
     picContainer.removeEventListener("click", clickEvent);
@@ -146,6 +161,7 @@ function listeners(){
   picContainer.addEventListener("click", clickEvent);
   button.addEventListener("click", showResults);
 }
+
 
 let productList = [
   new Product('R2D2 Bag', 'img/bag.jpg'),
