@@ -4,6 +4,7 @@ let picContainer = document.getElementById('pictures');
 let reportContainer = document.getElementById('chart');
 let button = document.getElementById('results');
 
+
 let image1 = document.querySelector('#pictures img:first-child');
 let image2 = document.querySelector('#pictures img:nth-child(2)');
 let image3 = document.querySelector('#pictures img:nth-child(3)');
@@ -20,6 +21,32 @@ let storedData = localStorage.getItem('allPics');
 
 if(storedData){
   state.allPics = JSON.parse(storedData);
+  console.log(`${state.allPics} get`);
+} else {
+  let productList = [
+    new Product('R2D2 Bag', 'img/bag.jpg'),
+    new Product('Banana', 'img/banana.jpg'),
+    new Product('Bathroom', 'img/bathroom.jpg'),
+    new Product('Boots', 'img/boots.jpg'),
+    new Product('Breakfast', 'img/breakfast.jpg'),
+    new Product('Bubblegum', 'img/bubblegum.jpg'),
+    new Product('Chair', 'img/chair.jpg'),
+    new Product('Cthulhu', 'img/cthulhu.jpg'),
+    new Product('Dog Duck', 'img/dog-duck.jpg'),
+    new Product('Dragon', 'img/dragon.jpg'),
+    new Product('Pen', 'img/pen.jpg'),
+    new Product('Pet Sweep', 'img/pet-sweep.jpg'),
+    new Product('Scissors', 'img/scissors.jpg'),
+    new Product('Shark', 'img/shark.jpg'),
+    new Product('Sweep', 'img/sweep.png'),
+    new Product('Tauntaun', 'img/tauntaun.jpg'),
+    new Product('Unicorn', 'img/unicorn.jpg'),
+    new Product('Water Can', 'img/water-can.jpg'),
+    new Product('Wine Glass', 'img/wine-glass.jpg'),
+  ]
+  for(let i = 0; i < productList.length; i++){
+    state.allPics.push(productList[i]);
+  }
 }
 
 // console.log(state.allPics);
@@ -101,7 +128,7 @@ function showResults() {
   let imageVotes = [];
   let imageViews = [];
   console.log(imageNames);
-
+  console.log(imageViews);
 
   // console.log(storedVotesData);
 
@@ -110,6 +137,7 @@ function showResults() {
     imageVotes.push(state.allPics[i].votes);
     imageViews.push(state.allPics[i].views);
   }
+  console.log(`${state.allPics} set `);
   localStorage.setItem(`allPics`, JSON.stringify(state.allPics));
 
   console.log('image names: ', imageNames);
@@ -171,31 +199,9 @@ function listeners(){
 }
 
 
-let productList = [
-  new Product('R2D2 Bag', 'img/bag.jpg'),
-  new Product('Banana', 'img/banana.jpg'),
-  new Product('Bathroom', 'img/bathroom.jpg'),
-  new Product('Boots', 'img/boots.jpg'),
-  new Product('Breakfast', 'img/breakfast.jpg'),
-  new Product('Bubblegum', 'img/bubblegum.jpg'),
-  new Product('Chair', 'img/chair.jpg'),
-  new Product('Cthulhu', 'img/cthulhu.jpg'),
-  new Product('Dog Duck', 'img/dog-duck.jpg'),
-  new Product('Dragon', 'img/dragon.jpg'),
-  new Product('Pen', 'img/pen.jpg'),
-  new Product('Pet Sweep', 'img/pet-sweep.jpg'),
-  new Product('Scissors', 'img/scissors.jpg'),
-  new Product('Shark', 'img/shark.jpg'),
-  new Product('Sweep', 'img/sweep.png'),
-  new Product('Tauntaun', 'img/tauntaun.jpg'),
-  new Product('Unicorn', 'img/unicorn.jpg'),
-  new Product('Water Can', 'img/water-can.jpg'),
-  new Product('Wine Glass', 'img/wine-glass.jpg'),
-];
 
-for(let i = 0; i < productList.length; i++){
-  state.allPics.push(productList[i]);
-}
+
+
 renderImages();
 listeners();
 removeButton();
