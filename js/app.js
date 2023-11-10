@@ -1,15 +1,16 @@
 "use strict";
 
+// Setting Containers/button to utilize for chart and show results
 let picContainer = document.getElementById('pictures');
 let reportContainer = document.getElementById('chart');
 let button = document.getElementById('results');
 
-
+// Setting place for images to go
 let image1 = document.querySelector('#pictures img:first-child');
 let image2 = document.querySelector('#pictures img:nth-child(2)');
 let image3 = document.querySelector('#pictures img:nth-child(3)');
 
-
+// Creating a state for the app.
 let state = {
   currentClicks: 0,
   totalClicks: 25,
@@ -17,8 +18,10 @@ let state = {
   threeImages: [],
 };
 
+// getting stored data placing it to variable
 let storedData = localStorage.getItem('allPics');
 
+// If there is stored data use it if not create product list and use it
 if(storedData){
   state.allPics = JSON.parse(storedData);
   console.log(`${state.allPics} get`);
@@ -53,6 +56,7 @@ if(storedData){
 // console.log(state.allPics.votes)
 // debugger;
 
+// Product constructor with properties for each product
 function Product( name, image) {
   this.name = name;
   this.imgFile = image;
@@ -61,7 +65,7 @@ function Product( name, image) {
 }
 
 
-
+// Renders images on the screen randomly and to where images won't repeat itself
 function renderImages(){
 
   function pickRandomImage() {
@@ -103,15 +107,8 @@ function renderImages(){
   state.allPics[productThree].views++;
 }
 
-// let storedVotesData = localStorage.getItem('allPics');
 
-// if (storedVotesData) {
-//   state.allPics = JSON.parse(storedVotesData);
-//   console.log(storedVotesData);
-// }
-
-// console.log(state.allPics);
-
+// Show Results button gone until click limit is reached
 function removeButton(){
   button.style.display = 'none';
 }
@@ -120,6 +117,7 @@ function renderResultsBtn(){
   button.style.display = "block";
 }
 
+// Will show votes and views based on product on a chart
 function showResults() {
 
   reportContainer.innerHTML = '';
@@ -172,6 +170,7 @@ function showResults() {
   let myChart = new Chart(reportContainer, config);
 }
 
+// Handling click event for pictures
 function clickEvent(event){
   let imageName = event.target.alt;
 

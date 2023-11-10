@@ -17,6 +17,8 @@ I Build a site that dynamically changes pictures on the screen after the user cl
 
 ![secondlighthouse](img/lighthouse2.png)
 
+![thirdLighthouse](img/lighthouse3.png)
+
 ### Reflections and Comments
 
 * Consider including the answers to your daily journal and submission questions here
